@@ -8,7 +8,7 @@ from sklearn.preprocessing import StandardScaler, LabelEncoder, OneHotEncoder
 
 
 model= load_model('salary_regression_model.h5')
-with open('scaler.pkl', 'rb') as f:
+with open('scalerr.pkl', 'rb') as f:
     scaler= pickle.load(f)
 with open('le_gender.pkl', 'rb') as f:
     encoder= pickle.load(f)
@@ -55,7 +55,3 @@ if st.button('Predict Salary'):
     predicted_salary= prediction[0][0]
     st.write(f'The predicted salary is: {predicted_salary:.2f}')
     
-
-
-
-
