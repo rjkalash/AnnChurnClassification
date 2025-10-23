@@ -45,7 +45,9 @@ if st.button('Predict Churn'):
 
     # One-hot encode 'Geography'
     Geography_encoded= onehotencoder.transform([[Geography]])
-    Geography_encoded_df= pd.DataFrame(Geography_encoded, columns=onehotencoder.get_feature_names_out(['Geography']))
+    # Create column names for the one-hot encoded features
+    ohe_cols = [f"Geography_{cat}" for cat in onehotencoder.categories_[0]]
+    Geography_encoded_df= pd.DataFrame(Geography_encoded, columns=ohe_cols)
     input_data= pd.concat([input_data.reset_index(drop=True), Geography_encoded_df], axis=1)
 
 
