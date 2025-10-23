@@ -43,13 +43,15 @@ if st.button('Predict Salary'):
     })
 
     # One-hot encode 'Geography'
-    Geography_encoded= onehotencoder.transform([[Geography]])
+    # Correct: Create a DataFrame with the expected column name
+    Geography_df = pd.DataFrame([[Geography]], columns=['Geography'])
+    Geography_encoded = onehotencoder.transform(Geography_df)
     # Use the encoder's method to get the correct feature names
     ohe_cols = onehotencoder.get_feature_names_out(['Geography'])
     # The output of transform is a sparse matrix, so we convert it to a dense array
     Geography_encoded_df= pd.DataFrame(Geography_encoded, columns=ohe_cols)
     input_data= pd.concat([input_data.reset_index(drop=True), Geography_encoded_df], axis=1)
-    input_data_scaled= scaler.transform(input_data)
+    input_data_scaled= scaler.transform(input_data.values)
     prediction= model.predict(input_data_scaled)
 
     predicted_salary= prediction[0][0]
